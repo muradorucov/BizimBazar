@@ -6012,21 +6012,25 @@ const mainElem = document.querySelector('.products')
 
 const searchInput = document.querySelector("input")
 const proLength = document.querySelector('#length')
-const pagination = document.querySelector('.pagination')
+const pagination = document.querySelector('.pagination');
+const selectElem = document.querySelector("#filterSelect")
 let list;
-renderProduct(data, 12, 0)
+let mainList;
+renderProduct(data)
+let sortData;
 
-function renderProduct(param, max, min) {
+function renderProduct(param, max = 12, min = 0) {
     list = param;
     proLength.innerHTML = param.length
     mainElem.innerHTML = ''
     param.forEach((item, index) => {
         if (index >= min && index < max) {
             mainElem.innerHTML += `<div class="product">
-    <img src="${item.thumbnail}" alt="">
-    <h2>${item.title}</h2>
-    <p>${item.price}</p>
-    </div>`
+                <img src="${item.thumbnail}" alt="">
+                <h2>${item.title}</h2>
+                <p>${item.price} AZN</p>
+                </div>
+            `
         }
     })
     let pagesNum = Math.ceil(param.length / 12);
@@ -6045,9 +6049,57 @@ function paginationBtn(param) {
 
 
 searchInput.addEventListener('input', () => {
-    let filteredProducts = data.filter((item) => {
+    list = data.filter((item) => {
         return item.title.toLowerCase().includes(searchInput.value.toLowerCase())
     })
-    mainElem.innerHTML = '';
-    renderProduct(filteredProducts, 12, 0)
+    mainList = [...list]
+    sortDataFunc()
+    renderProduct(sortData)
+
 })
+
+selectElem.addEventListener("input", () => {
+    sortDataFunc()
+})
+
+function sortDataFunc() {
+    let val = selectElem.value;
+    sortData = list;
+    if (val === "1") {
+        sortData = [...list].sort((a, b) => a.title.localeCompare(b.title))
+    } else if (val === "2") {
+        sortData = [...list].sort((a, b) => b.title.localeCompare(a.title))
+    } else if (val === "3") {
+        sortData = [...list].sort((a, b) => a.price - b.price)
+    }
+    else if (val === "4") {
+        sortData = [...list].sort((a, b) => b.price - a.price)
+    } else {
+        renderProduct(mainList)
+    }
+}
+
+// let arr = [100, 1, 2, 3, 1000, 400000, 4, 5]
+// let arr = ["Nurlan", "Murad", "Huseyn"];
+// let arr = ["a", "ə", "ş", "ç", "ğ", "ü"];
+// let arr = [
+
+//     {
+//         username: "nurlan",
+//         age: 18
+//     },
+//     {
+//         username: "murad",
+//         age: 24
+//     }, {
+//         username: "huseyn",
+//         age: 16
+//     }
+// ]
+
+
+// let result = arr.sort((a, b) => a - b)
+// let result = arr.sort((a, b) => a.localeCompare(b))
+// let result = arr.sort((a, b) => a.username.localeCompare(b.username))
+// let result = arr.sort((a, b) => a.age - b.age)
+// console.log(arr);
