@@ -1,58 +1,70 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.wrapper{
+
+.wrapper {
+    width: 80%;
+    max-width: 1140px;
     margin-inline: auto;
 }
-nav{
+
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 30px;
     background-color: orange;
-    .logo{
+
+    .logo {
         font-size: 45px;
-font-weight: 800;
-color: #fff;
+        font-weight: 800;
+        color: #fff;
     }
-    input{
+
+    input {
         width: 350px;
         height: 35px;
     }
 }
-.products{
+
+.products {
     padding-block: 4rem;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    .product{
+
+    .product {
         box-shadow: 0 0 10px -1px burlywood;
         padding: 20px;
-        img{
+
+        img {
             width: 100%;
         }
     }
 }
 
-.pagination{
+.pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     margin-bottom: 4rem;
-    button{
+
+    button {
         padding: 10px 15px;
         background-color: blueviolet;
         color: #fff;
         border: 1px solid blueviolet;
         transition: all .4s ease;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
             background-color: transparent;
             color: blueviolet;
         }

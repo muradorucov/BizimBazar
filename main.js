@@ -6014,14 +6014,14 @@ const searchInput = document.querySelector("input")
 const proLength = document.querySelector('#length')
 const pagination = document.querySelector('.pagination')
 let list;
-renderProduct(data,12,0)
+renderProduct(data, 12, 0)
 
-function renderProduct(param,max,min) {
+function renderProduct(param, max, min) {
     list = param;
     proLength.innerHTML = param.length
-    mainElem.innerHTML=''
+    mainElem.innerHTML = ''
     param.forEach((item, index) => {
-        if (index>=min && index <max) {
+        if (index >= min && index < max) {
             mainElem.innerHTML += `<div class="product">
     <img src="${item.thumbnail}" alt="">
     <h2>${item.title}</h2>
@@ -6030,25 +6030,24 @@ function renderProduct(param,max,min) {
         }
     })
     let pagesNum = Math.ceil(param.length / 12);
-    pagination.innerHTML=''
+    pagination.innerHTML = ''
     for (let i = 1; i <= pagesNum; i++) {
-      pagination.innerHTML +=`<button onclick='paginationBtn(${i})'>${i}</button>`
+        pagination.innerHTML += `<button onclick='paginationBtn(${i})'>${i}</button>`
 
     }
 }
 
 function paginationBtn(param) {
-    let max = param*12;
-    let min = max-12;
-  renderProduct(list,max,min)
+    let max = param * 12;
+    let min = max - 12;
+    renderProduct(list, max, min)
 }
 
 
-const btnElem = document.getElementById('btn')
 searchInput.addEventListener('input', () => {
     let filteredProducts = data.filter((item) => {
         return item.title.toLowerCase().includes(searchInput.value.toLowerCase())
     })
     mainElem.innerHTML = '';
-    renderProduct(filteredProducts,12,0)
+    renderProduct(filteredProducts, 12, 0)
 })
